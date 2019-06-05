@@ -1,13 +1,6 @@
 # homebrew-docker-machine-nfs
+
 Custom tap of docker-machine-nfs w/ fixes for vmware fusion
-
-
-# homebrew-docker-machine-nfs
-Custom formulas to install/compile scarlett dependencies
-
-
-
-# homebrew-docker-machine-nfs
 
 [![Build Status](http://img.shields.io/travis/bossjones/homebrew-docker-machine-nfs.svg?style=flat)](https://travis-ci.org/bossjones/homebrew-docker-machine-nfs)
 
