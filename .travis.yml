@@ -1,0 +1,73 @@
+---
+env:
+  global:
+    - CI=true
+
+
+# --------------------------
+matrix:
+  include:
+  # ORIGINAL WORKING VERSION
+  - name: "High Sierra (10.13) and xcode9.3"
+    os: osx
+    sudo: required
+    language: objective-c
+    # 10.13 (see https://docs.travis-ci.com/user/osx-ci-environment/#OS-X-Version)
+    osx_image: xcode9.3
+    xcode_sdk: macosx10.13
+
+  - name: "Sierra (10.12) and xcode8.3"
+    os: osx
+    sudo: required
+    language: objective-c
+    osx_image: xcode8.3
+    xcode_sdk: macosx10.12
+
+  - name: "Sierra (10.12) and xcode9"
+    os: osx
+    sudo: required
+    language: objective-c
+    osx_image: xcode9
+    xcode_sdk: macosx10.12
+    env: MY_HOMEBREW_UPDATE="1"
+
+  - name: "Sierra (10.12) and xcode9.1"
+    os: osx
+    sudo: required
+    language: objective-c
+    osx_image: xcode9.1
+    xcode_sdk: macosx10.12
+
+  - name: "Sierra (10.12) and xcode9.2"
+    os: osx
+    sudo: required
+    language: objective-c
+    osx_image: xcode9.2
+    xcode_sdk: macosx10.12
+
+  - name: "High Sierra (10.13) and xcode9.4"
+    os: osx
+    sudo: required
+    language: objective-c
+    osx_image: xcode9.4
+    xcode_sdk: macosx10.13
+
+before_install:
+  # ---------------------
+  # SOURCE: https://github.com/Martiusweb/asynctest/blob/292e7519949901dfc49638cad2ff6c067e8a9dcb/.travis.yml
+  - brew update
+  - brew install docker docker-machine docker-compose
+  # -----------------------
+  - xcodebuild -version
+  - travis_retry brew tap bossjones/docker-machine-nfs
+
+install:
+- docker-machine create --driver virtualbox dev
+
+script:
+  - brew install bossjones/docker-machine-nfs/docker-machine-nfs
+  - docker-machine-nfs dev
+
+after_success:
+# Get help page
+- "docker-machine-nfs"
